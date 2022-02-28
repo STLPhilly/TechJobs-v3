@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by LaunchCode
- */
+
 @Controller
 @RequestMapping(value = "list")
 public class ListController {
@@ -23,7 +21,7 @@ public class ListController {
     static HashMap<String, Object> tableChoices = new HashMap<>();
 
     public ListController () {
-        columnChoices.put("all", "All");
+        columnChoices.put("all", "View All");
         columnChoices.put("employer", "Employer");
         columnChoices.put("location", "Location");
         columnChoices.put("positionType", "Position Type");
@@ -43,7 +41,7 @@ public class ListController {
         model.addAttribute("locations", JobData.getAllLocations());
         model.addAttribute("positions", JobData.getAllPositionTypes());
         model.addAttribute("skills", JobData.getAllCoreCompetency());
-
+        model.addAttribute("ViewAll", "View All");
         return "list";
     }
 
