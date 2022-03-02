@@ -46,7 +46,8 @@ public class ListController {
     }
 
     @GetMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
+    public String listJobsByColumnAndValue(Model model, @RequestParam String column,
+                                                        @RequestParam(required = false) String value) {
         ArrayList<Job> jobs;
         if (column.equals("all")){
             jobs = JobData.findAll();
@@ -54,9 +55,11 @@ public class ListController {
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+            if (value.equals(null)){
+                model.addAttribute("title", "All Jobs");
+            }
         }
         model.addAttribute("jobs", jobs);
-
         return "list-jobs";
     }
 }
